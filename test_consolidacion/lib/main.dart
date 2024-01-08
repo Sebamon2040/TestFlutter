@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'pages/breed_page.dart'; // Asegúrate de usar la ruta correcta a tu archivo breed_page.dart
+import 'blocs/breeds/breed_bloc.dart'; // Asegúrate de usar la ruta correcta a tu archivo breed_bloc.dart
+import 'api/api_repository.dart'; // Asegúrate de usar la ruta correcta a tu archivo api_repository.dart
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
 
+class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      home: BlocProvider(
+        create: (context) => BreedBloc(apiRepository: ApiRepository())..add(FetchBreeds()),
+        child: BreedPage(),
       ),
     );
   }
