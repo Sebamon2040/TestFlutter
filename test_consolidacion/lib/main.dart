@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'pages/breed_page.dart'; // Asegúrate de usar la ruta correcta a tu archivo breed_page.dart
-import 'blocs/breeds/breed_bloc.dart'; // Asegúrate de usar la ruta correcta a tu archivo breed_bloc.dart
-import 'api/api_repository.dart'; // Asegúrate de usar la ruta correcta a tu archivo api_repository.dart
+import 'package:test_consolidacion/blocs/pagos/pagos_cubit.dart';
+import 'package:test_consolidacion/screens/pagos_screen.dart';  
 
 void main() {
-  runApp(MainApp());
+  runApp(MyApp());
 }
 
-
-class MainApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Pagos App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: BlocProvider(
-        create: (context) => BreedBloc(apiRepository: ApiRepository())..add(FetchBreeds()),
-        child: BreedPage(),
+        create: (context) => PagosCubit(),
+        child: PagosScreen(),
       ),
     );
   }
